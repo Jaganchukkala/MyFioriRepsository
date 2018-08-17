@@ -7,7 +7,7 @@
 					<StandardListItem title="{Vkorg}" type="Navigation" visible="true" press="getSDDeatails"/>
 			</items>
 	</List>
-	
+	fsdfsd
 	</Page>
     
 </mvc:View>
