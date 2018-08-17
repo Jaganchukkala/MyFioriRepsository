@@ -1,0 +1,13 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZSOLIST.controller.MasterView"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Sales Orgnization"  showNavButton="true" navButtonPress="goBack">
+		<SearchField id="search" search="onSearch"></SearchField>
+	<List  id="materailsList" items="{path: '/SOHEADERSet' }" growing="true" growingThreshold="5" >
+			<items>
+					<StandardListItem title="{Vkorg}" type="Navigation" visible="true" press="getSDDeatails"/>
+			</items>
+	</List>
+	
+	</Page>
+    
+</mvc:View>

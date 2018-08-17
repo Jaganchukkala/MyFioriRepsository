@@ -1,0 +1,67 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ZSOLIST.controller.SalesDocementDetails"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Sales Details">
+		<content>
+			<IconTabBar id="salesDetaisId">
+				<items>
+					<IconTabFilter icon="sap-icon://hint" text="SalesOrder" key="salesTab">
+						<content>
+							<HBox>
+								<Button icon="sap-icon://bar-code" text="SCAN" press="onBarcodeScan"></Button>
+								<Input id="salesDocId" value="4970"></Input>
+								<Button text="Material Info" press="getMaterialInfo"></Button>
+							</HBox>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://notes" text="Items Details" key="materialsTab">
+						<content>
+							<!--<PDFViewer showDownloadButton="true">-->
+							<!--	<LayoutData>-->
+							<Table id="idMaterialData" sticky="ColumnHeaders" items="{path: '/results'}">
+								<headerToolbar>
+									<Toolbar>
+										<Title level="H2" text="PDF Table"/>
+										<ToolbarSpacer></ToolbarSpacer>
+										<Button icon="sap-icon://download" press="onDataExportPDF"/>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column width="12em">
+										<header><Text text="Vbeln"/></header>
+									</Column>
+									<Column width="12em">
+										<header><Text text="Posnr"/></header>
+									</Column>
+									<Column width="12em">
+										<header><Text text="Matnr"/></header>
+									</Column>
+									<Column width="12em">
+										<header><Text text="Arktx"/></header>
+									</Column>
+									<Column width="12em">
+										<header><Text text="Pstyv"/></header>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem press="onItemPress" type="Active">
+										<cells>
+											<!--<Text text="{Vbeln}"  tooltip= "{Vbeln}"></Text>-->
+											<Input type="Text" value="{Vbeln}" maxLength="2" tooltip="{Vbeln}"></Input>
+											<Text text="{ path: 'Posnr', formatter: '.formatter.textChange' }" tooltip="{Posnr}"/>
+											<Text text="{ path: 'Matnr', formatter: '.formatter.textChange' }" tooltip="{Matnr}"/>
+											<Text text="{ path: 'Arktx', formatter: '.formatter.textChange' }" tooltip="{Arktx}"/>
+											<Text text="{ path: 'Pstyv', formatter: '.formatter.textChange' }" tooltip="{Pstyv}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+							<!--	<Text text= "text"></Text>-->
+							<!--</LayoutData>-->
+							<!--</PDFViewer>-->
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Page>
+</mvc:View>

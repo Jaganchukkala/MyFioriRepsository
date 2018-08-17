@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "ZSOLIST.ZSOLIST",
+        "description": "test",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#ZSOLIST-Display",
+        "navigationComponentName": "ZSOLIST",
+        "intentSemanticObject": "ZSOLIST",
+        "intentAction": "Display",
+        "html5ApplicationName": "zsolist",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "225b0308-58dd-4e75-8ed5-ef654a6f57f1"
+        ],
+        "contentPackages": [
+            "034a7733-4b21-407f-b765-d705950ec791"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Title",
+        "subtitle": "Subtitle",
+        "searchKeywords": "Title,Subtitle",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}

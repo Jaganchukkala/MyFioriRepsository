@@ -1,0 +1,165 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "ZSOLIST",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZSOLIST_SRV": {
+				"uri": "/sap/opu/odata/sap/ZSOLIST_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/ZSOLIST_SRV/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "ZSOLIST.view.MainView",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.collaboration": {},
+				"sap.m": {},
+				"sap.ui.comp": {},
+				"sap.ui.core": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "ZSOLIST.i18n.i18n"
+				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZSOLIST_SRV",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			],
+			"js": [
+				{
+					"uri": "JS/jspdf.js"
+				},
+				{
+					"uri": "JS/autotable.js"
+				},
+				{
+					"uri": "JS/jquery.simplePagination.js"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"viewPath": "ZSOLIST.view",
+				"controlId": "idSplitApp",
+				"routerClass": "sap.m.routing.Router"
+			},
+			"targets": {
+				"MasterTarget": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "MasterView",
+					"controlAggregation": "masterPages"
+				},
+				"detailTarget": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "DetailView",
+					"controlAggregation": "detailPages"
+				},
+				"salesDocumentDetails": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "SalesDocementDetails",
+					"controlAggregation": "detailPages"
+				}
+			},
+			"routes": [
+				{
+					"name": "MasterTarget",
+					"pattern": "",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"MasterTarget",
+						"detailTarget"
+					]
+				},
+				{
+					"name": "salesDocumentDetails1",
+					"pattern": "toSales/{salesdoc}",
+					"titleTarget": "",
+					"greedy": false,
+					"target": [
+						"MasterTarget",
+						"salesDocumentDetails"
+					]
+				}
+			]
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zsolist_test/webapp",
+		"_version": "1.1.0"
+	}
+}

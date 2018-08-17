@@ -1,0 +1,85 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZSOLIST_SRV" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="SOHEADER" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vkorg"/>
+                </Key>
+                <Property Name="Vkorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Org." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Stats Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Company code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Adrnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Address" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="SDHEADERSet" Relationship="ZSOLIST_SRV.OrgToHead" FromRole="FromRole_OrgToHead" ToRole="ToRole_OrgToHead"/>
+            </EntityType>
+            <EntityType Name="SDHEADER" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Sales Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Org." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ernam" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Created by" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Auart" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Doc. Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Augru" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Order reason" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lifsk" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Delivery block" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Faksk" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Billing block" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="SDITEMSet" Relationship="ZSOLIST_SRV.HeadToItem" FromRole="FromRole_HeadToItem" ToRole="ToRole_HeadToItem"/>
+            </EntityType>
+            <EntityType Name="SDITEM" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Sales Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Arktx" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pstyv" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Item category" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posar" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Item type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="HeadToItem" sap:content-version="1">
+                <End Type="ZSOLIST_SRV.SDHEADER" Multiplicity="1" Role="FromRole_HeadToItem"/>
+                <End Type="ZSOLIST_SRV.SDITEM" Multiplicity="*" Role="ToRole_HeadToItem"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_HeadToItem">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_HeadToItem">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="OrgToHead" sap:content-version="1">
+                <End Type="ZSOLIST_SRV.SOHEADER" Multiplicity="1" Role="FromRole_OrgToHead"/>
+                <End Type="ZSOLIST_SRV.SDHEADER" Multiplicity="*" Role="ToRole_OrgToHead"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_OrgToHead">
+                        <PropertyRef Name="Vkorg"/>
+                    </Principal>
+                    <Dependent Role="ToRole_OrgToHead">
+                        <PropertyRef Name="Vkorg"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZSOLIST_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="SOHEADERSet" EntityType="ZSOLIST_SRV.SOHEADER" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="SDHEADERSet" EntityType="ZSOLIST_SRV.SDHEADER" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="SDITEMSet" EntityType="ZSOLIST_SRV.SDITEM" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="OrgToHeadSet" Association="ZSOLIST_SRV.OrgToHead" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SOHEADERSet" Role="FromRole_OrgToHead"/>
+                    <End EntitySet="SDHEADERSet" Role="ToRole_OrgToHead"/>
+                </AssociationSet>
+                <AssociationSet Name="HeadToItemSet" Association="ZSOLIST_SRV.HeadToItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SDHEADERSet" Role="FromRole_HeadToItem"/>
+                    <End EntitySet="SDITEMSet" Role="ToRole_HeadToItem"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZSOLIST_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZSOLIST_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
