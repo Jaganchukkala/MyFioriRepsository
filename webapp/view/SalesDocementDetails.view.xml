@@ -17,7 +17,7 @@
 						<content>
 							<!--<PDFViewer showDownloadButton="true">-->
 							<!--	<LayoutData>-->
-							<Table id="idMaterialData"  items="{path: '/results'}">
+							<Table id="idMaterialData" sticky="ColumnHeaders" items="{path: '/results'}">
 								<headerToolbar>
 									<Toolbar>
 										<Title level="H2" text="PDF Table"/>
